@@ -40,9 +40,8 @@ module RSpec
             config.send(method, *args, &block)
           end
         end
-        # for shared examples
+        # for global shared examples
         $LOAD_PATH << "./spec/support"
-        binding.irb
         Dir["./spec/support/**/*.rb"].sort.each { |f| load f }
 
         forward_rspec_config_singleton_to(self.config_proxy)
