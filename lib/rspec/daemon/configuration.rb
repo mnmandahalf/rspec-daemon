@@ -1,7 +1,7 @@
 module RSpec
   class Daemon
     class Configuration
-      attr_accessor :config_proxy, :world
+      attr_accessor :config_proxy, :root_shared_examples
 
       class RecordingProxy < Struct.new(:target, :recorded_messages)
         [:include, :extend].each do |method|
@@ -25,7 +25,6 @@ module RSpec
         configuration_block.call # spec helper is called during this yield, see #reset
 
         self.config_proxy = ::RSpec.configuration
-        self.world = ::RSpec.world
         RSpec.configuration = original_config
 
         forward_rspec_config_singleton_to(self.config_proxy)
@@ -41,7 +40,8 @@ module RSpec
             config.send(method, *args, &block)
           end
         end
-        RSpec.world = self.world
+        # for shared examples
+        Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
 
         forward_rspec_config_singleton_to(self.config_proxy)
       end
