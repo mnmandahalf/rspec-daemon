@@ -41,6 +41,7 @@ module RSpec
           end
         end
         # for shared examples
+        $LOAD_PATH << "./spec/support"
         Dir["spec/support/**/*.rb"].sort.each { |f| require f }
 
         forward_rspec_config_singleton_to(self.config_proxy)

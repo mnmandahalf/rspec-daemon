@@ -24,7 +24,6 @@ module RSpec
 
     def entry_point
       $LOAD_PATH << "./spec"
-      $LOAD_PATH << "./spec/support"
 
       RSpec::Core::Runner.disable_autorun!
       server = TCPServer.open("0.0.0.0", 3002)
