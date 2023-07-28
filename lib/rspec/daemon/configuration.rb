@@ -41,7 +41,7 @@ module RSpec
           end
         end
         # for shared examples
-        Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }
+        Dir["spec/support/**/*.rb"].sort.each { |f| require f }
 
         forward_rspec_config_singleton_to(self.config_proxy)
       end
