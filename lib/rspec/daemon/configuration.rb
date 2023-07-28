@@ -25,7 +25,7 @@ module RSpec
         configuration_block.call # spec helper is called during this yield, see #reset
 
         self.config_proxy = ::RSpec.configuration
-        self.root_shared_examples = ::Rspec.world.shared_example_groups.dup
+        self.root_shared_examples = ::RSpec.world.shared_example_groups.dup
         RSpec.configuration = original_config
 
         forward_rspec_config_singleton_to(self.config_proxy)
@@ -41,7 +41,7 @@ module RSpec
             config.send(method, *args, &block)
           end
         end
-        Rspec.world.shared_example_groups.replace(self.root_shared_examples)
+        RSpec.world.shared_example_groups.replace(self.root_shared_examples)
 
         forward_rspec_config_singleton_to(self.config_proxy)
       end
